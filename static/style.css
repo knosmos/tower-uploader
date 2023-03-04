@@ -1,0 +1,67 @@
+html, body {
+    background-color: rgb(250, 250, 250);
+}
+
+img {
+    width: 30%;
+}
+
+input, select {
+    display: inline-block;
+}
+
+input, select, textarea, ::-webkit-file-upload-button, ::file-selector-button {
+    border: 1px solid rgb(118, 118, 118);
+}
+
+input[type="file"] {
+    background-color: transparent;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 0px;
+    border: none;
+}
+
+::-webkit-file-upload-button, ::file-selector-button {
+    color: #1d1d1d;
+    color: var(--form-text);
+    background-color: var(--background);
+    font-family: inherit;
+    font-size: inherit;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    transition: 0.1s all;
+}
+
+::-webkit-file-upload-button:hover, ::file-selector-button:hover {
+    background: #c1c1c1;
+    background: var(--button-hover);
+}
+
+@keyframes fadeout {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.toast {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background-color: rgb(193, 214, 193);
+    color: var(--form-text);
+    border-radius: 5px;
+    padding: 10px;
+    animation: fadeout 4s;
+    opacity: 0;
+}

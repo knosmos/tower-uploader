@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tower Submission Platform</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+        <link rel="stylesheet" href="static/style.css">
+    </head>
+    <body>
+        <img src="static/logo.png">
+        <h2>PHS Tower Submission Platform <span style="color: rgb(179, 179, 179)">Beta</span></h2>
+        <form method="post" enctype="multipart/form-data">
+            <h3>Section</h3>
+            <hr>
+            <select required name="category">
+                <option value="">Select Category</option>
+                <option value="news-features">News and Features</option>
+                <option value="opinions">Opinions</option>
+                <option value="arts-entertainment">Arts and Entertainment</option>
+                <option value="sports">Sports</option>
+            </select>
+            
+            <select required disabled name="subcategory">
+                <option value="">Select Subcategory</option>
+            </select>
+
+            <h3>Article</h3>
+            <hr>
+            <h4>Header Image</h4>
+            <input type="file" required name="header-img">
+
+            <h4>Article Text</h4>
+            <input placeholder="Article Title" required name="title">
+            <input placeholder="Authors" name="authors">
+            <p><em>Input authors comma separated (e.g. James Kirk, Jean-Luc Picard); leave blank for editorial pages</em></p>
+            <textarea placeholder="Article Body" required name="content"></textarea>
+            
+            <br>
+            <input type="submit">
+        </form>
+        {% if success %}
+        <div class="toast">Article Uploaded!</div>
+        {% endif %}
+        <script>
+            let category = document.querySelector("select");
+            let subcategory = document.querySelectorAll("select")[1];
+
+            // Once a category is selected, enable the subcategory dropdown and set options
+            options = {
+                "news-features": [["None", "news-features"], ["PHS Profiles", "phs-profiles"]],
+                "opinions": [["None", "opinions"], ["Editorials", "editorials"], ["Cheers & Jeers", "cheers-jeers"]],
+                "arts-entertainment": [["None", "arts-entertainment"], ["Student Artists", "student-artists"]],
+                "sports": [["None", "sports"], ["Student Athletes", "student-athletes"]]
+            }
+
+            function setOptions() {
+                subcategory.disabled = false;
+                subcategory.innerHTML = "";
+
+                if (category.value == "") {
+                    subcategory.disabled = true;
+                    subcategory.innerHTML = "<option value=''>Select Subcategory</option>";
+                    return;
+                }
+
+                for (let i = 0; i < options[category.value].length; i++) {
+                    let option = document.createElement("option");
+                    option.value = options[category.value][i][1];
+                    option.innerHTML = options[category.value][i][0];
+                    subcategory.appendChild(option);
+                }
+            }
+
+            category.addEventListener("change", function() {
+                setOptions();
+                localStorage.setItem("category", category.value);
+                localStorage.setItem("subcategory", subcategory.value);
+            });
+
+            // Retain selected category and subcategory on page reload
+            subcategory.addEventListener("change", function() {
+                localStorage.setItem("category", category.value);
+                localStorage.setItem("subcategory", subcategory.value);
+            });
+
+            window.addEventListener("load", function() {
+                if (localStorage.getItem("category") != null) {
+                    category.value = localStorage.getItem("category");
+                    setOptions();
+                    subcategory.value = localStorage.getItem("subcategory");
+                }
+            });
+        </script>
+    </body>
+</html>
