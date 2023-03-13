@@ -33,10 +33,12 @@
             <input placeholder="Authors" name="authors">
             <p><em>Input authors comma separated (e.g. James Kirk, Jean-Luc Picard); leave blank for editorial pages</em></p>
             <textarea placeholder="Article Body" required name="content"></textarea>
-            
-            <br>
+            <p><em>Do not use this platform for Vanguard spreads or articles with multiple images (Online will upload those manually)</em></p>
             <input type="submit">
         </form>
+        <footer>
+            By Jieruei Chang 2023 (<a href="mailto:jchang@princetonk12.org">click here to complain</a>)
+        </footer>
         {% if success %}
         <div class="toast">Article Uploaded!</div>
         {% endif %}

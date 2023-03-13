@@ -65,3 +65,11 @@ input[type="file"] {
     animation: fadeout 4s;
     opacity: 0;
 }
+
+a[href^='mailto\:']::before {
+    content: "" !important;
+}
+
+a {
+    color: var(--form-text);
+}
